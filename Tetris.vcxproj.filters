@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ソース ファイル">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseComponent">
+      <UniqueIdentifier>{473a7ad5-0b2a-4a2a-adad-b9e8489a4094}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseComponent\DrawableComponent">
+      <UniqueIdentifier>{9f1f792e-c329-45d9-890c-1fba7a73255c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseComponent\DrawableComponent\Page">
+      <UniqueIdentifier>{d484d36c-9a1f-4f7e-b72b-0962962a169c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BaseComponent">
+      <UniqueIdentifier>{069fa383-1df9-42f9-adda-6b26124b38cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BaseComponent\DrawableComponent">
+      <UniqueIdentifier>{99737a55-0177-462b-bc88-fc741167b383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BaseComponent\DrawableComponent\Page">
+      <UniqueIdentifier>{05f63fb8-2fec-4b64-9ef8-29ea2e7a016c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseComponent\DrawableComponent\GameObject">
+      <UniqueIdentifier>{2e26b2bf-dd9a-40bd-bd13-a6cc98c6e57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject">
+      <UniqueIdentifier>{d6f4257f-579f-4bc1-b1e8-c69887b38151}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\BaseComponent\DrawableComponent\GameObject\Effect">
+      <UniqueIdentifier>{fe543e7e-10f0-499b-995f-406e7cbee5c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject\Effect">
+      <UniqueIdentifier>{0b4e4de9-6ff8-4582-b4ec-b9b91ee46e84}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Frame.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>ソース ファイル\BaseComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyPushed.cpp">
+      <Filter>ソース ファイル\BaseComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Fps.cpp">
+      <Filter>ソース ファイル\BaseComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawableComponent.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GamePage.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="Page.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="TitlePage.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectionMenu.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Block.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomNum.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_DelBlock.cpp">
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_FadeString.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Root.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Frame.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>ヘッダー ファイル\BaseComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawableComponent.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Fps.h">
+      <Filter>ヘッダー ファイル\BaseComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="GamePage.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyPushed.h">
+      <Filter>ヘッダー ファイル\BaseComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Page.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClInclude>
+    <ClInclude Include="TitlePage.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\Page</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionMenu.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomNum.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_DelBlock.h">
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_FadeString.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
