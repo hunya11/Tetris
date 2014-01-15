@@ -7,6 +7,11 @@ private:
 
 	// Summary : ページを起動したときの時間
 	int startNowCount;
+
+	vector<Effect*> effList;
+
+	void EffectManager(void);
+
 protected:
 	// Summary : キー入力管理
 	static KeyPushed* key;
@@ -23,8 +28,11 @@ public:
 	// Summary : デストラクタ
 	virtual ~Page(void) = 0;
 
-	// Summary : 描画処理
+	// Summary : 更新処理
 	virtual void UpData(void);
+	
+	// Summary : 描画処理
+	virtual void Draw(void);
 
 	// Summary : リソース読み込み
 	virtual void LoadResource(void) = 0;
@@ -32,6 +40,7 @@ public:
 	/*プロパティ*/
 	void static NowPage(FRAME_PAGE::Type fp);
 	FRAME_PAGE::Type static NowPage(void);
-
+	
+	void RunEffect(Effect* eff);
 };
 

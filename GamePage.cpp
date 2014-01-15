@@ -294,7 +294,7 @@ void GamePage::UpData(void){
 
 						for(int x=0;x<sizeof(block[y])/sizeof(block[y][x]);x++){
 							//エフェクト
-							effList.push_back(new Effect_DelBlock(this->block[y][x]->X() + this->block[y][x]->SizeX() / 2, this->block[y][x]->Y() + this->block[y][x]->SizeY() / 2,this->block[y][x]->Texture()));
+							base::RunEffect(new Effect_DelBlock(this->block[y][x]->X() + this->block[y][x]->SizeX() / 2, this->block[y][x]->Y() + this->block[y][x]->SizeY() / 2,this->block[y][x]->Texture()));
 						}
 
 						//ならんだらけす
@@ -332,7 +332,7 @@ void GamePage::UpData(void){
 					ss << setw(10) << SCORE_POINT::LINE4;
 					break;
 				}
-				effList.push_back(new Effect_FadeString(122,280,32,ss.str()));
+				base::RunEffect(new Effect_FadeString(122,280,32,ss.str()));
 			}
 
 			//新しいミノの生産
@@ -391,15 +391,9 @@ void GamePage::UpData(void){
 
 	}
 
-	//エフェクトの更新処理
-	for(int i=0;i<effList.size();i++){
-		if(effList[i] != NULL){
-			effList[i]->UpData();
-		}
-	}	
+	
 
-	//エフェクトの実行管理
-	this->EffectManager();
+
 
 	//エスケープキーでゲーム終了
 	if(key->CheckKeyPushed(KEY_INPUT_ESCAPE) == true){
@@ -456,13 +450,7 @@ void GamePage::Draw(void){
 		SetFontSize(16);
 	}
 
-	//エフェクト表示
-	for(int i=0;i<effList.size();i++){
-		if(effList[i] != NULL){
-			effList[i]->Draw();
-		}
-	}
-
+	base::Draw();
 }
 
 
@@ -801,21 +789,3 @@ void GamePage::SetDrawStockMinoPos(void){
 }
 
 
-void GamePage::EffectManager(void){
-	vector<Effect*>::iterator it = effList.begin();
-	while( it != effList.end() ){
-		Effect* p = *it;
-		if(p->IsDrawEnd() == true){
-			delete p;
-			it = effList.erase(it);			
-		}else{
-			it++;
-		}
-	}	
-
-	//領域の縮小
-	if(effList.size() == 0 && effList.capacity() != 0)	{
-		vector<Effect*>(effList).swap(effList);
-	}
-
-}

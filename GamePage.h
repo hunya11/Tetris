@@ -99,8 +99,8 @@ private:
 
 	bool isOptionShowNext;
 
-	Effect* eff;
-	vector<Effect*> effList;
+
+	
 
 	bool isGameOver;
 
@@ -147,7 +147,6 @@ public:
 
 	void SetDrawStockMinoPos(void);
 
-	void EffectManager(void);
 
 };
 
