@@ -16,7 +16,6 @@ GamePage::~GamePage(void)
 	}
 
 	delete rand;
-
 }
 
 
@@ -62,8 +61,6 @@ void GamePage::Init(void){
 	for(int i=0;i<3;i++){
 		minoNextStock[i] = GetRandMino();
 	}
-	//minoNextStock[0] = BLOCK::I;
-	//minoNextStock[1] = BLOCK::I;
 
 	MinoFactory(minoNextStock[0]);
 	PushMinoStock();
@@ -81,6 +78,7 @@ void GamePage::Init(void){
 	OldIdleSeconds = 0;
 	OldDropSeconds = 0;
 	IdleMax = 1500;
+	NowIdleSeconds = IdleMax;
 	DropMax = 1000;
 
 
@@ -98,7 +96,10 @@ void GamePage::Init(void){
 	isOptionUseHold = true;
 	isOptionShowNext = true;
 
-	numScore = 0;
+	numScore     = 0;
+	numDelLine   = 0;
+	numGameLevel = 1;
+
 
 	isGameOver = false;
 
@@ -127,7 +128,7 @@ void GamePage::UpData(void){
 			buf[i] = mino[i];
 		}
 
-		isCanMove = true;
+		isCanMove   = true;
 		isSpin		= false;
 		isHold		= false;
 
@@ -149,13 +150,13 @@ void GamePage::UpData(void){
 			}
 			if(isUnGrounding == true){//接地していない
 				isGrounding = false;//接地OFF
-				IdleMax -= 300;//アイドル時間の最大値を減らす
+				NowIdleSeconds -= 300;//アイドル時間の最大値を減らす
 				OldDropSeconds = localNowCount;//放置時間の設定
 			}
 		}
 
 		//もしアイドル時間最大値を超えたら
-		if(this->localNowCount - this->OldIdleSeconds > this->IdleMax && isGrounding == true){
+		if(this->localNowCount - this->OldIdleSeconds > this->NowIdleSeconds && isGrounding == true){
 			isIdletime = false;//アイドルタイム終了
 		}
 
@@ -248,7 +249,7 @@ void GamePage::UpData(void){
 					this->isGrounding = false;
 					this->isHardDrop  = false;
 					this->isIdletime  = true;
-					this->IdleMax	  = 1500;
+					this->NowIdleSeconds = IdleMax;
 					this->OldDropSeconds = localNowCount;
 				}
 			}
@@ -314,25 +315,29 @@ void GamePage::UpData(void){
 		
 			if(delLine != 0){
 				stringstream ss;
+				double raisePoint = (1.0 + ((double)this->numGameLevel-1.0) / 10.0);
 				switch(delLine){
 				case 1:
-					numScore += SCORE_POINT::LINE1;
-					ss << setw(10) << SCORE_POINT::LINE1;
+					numScore += (int)(SCORE_POINT::LINE1 * raisePoint);
+					ss << setw(10) << (int)(SCORE_POINT::LINE1 * raisePoint);
 					break;
 				case 2:
-					numScore += SCORE_POINT::LINE2;
-					ss << setw(10) << SCORE_POINT::LINE2;
+					numScore += (int)(SCORE_POINT::LINE2 * raisePoint);
+					ss << setw(10) << (int)(SCORE_POINT::LINE2 * raisePoint);
 					break;
 				case 3:
-					numScore += SCORE_POINT::LINE3;
-					ss << setw(10) << SCORE_POINT::LINE3;
+					numScore += (int)(SCORE_POINT::LINE3 * raisePoint);
+					ss << setw(10) << (int)(SCORE_POINT::LINE3 * raisePoint);
 					break;
 				case 4:
-					numScore += SCORE_POINT::LINE4;
-					ss << setw(10) << SCORE_POINT::LINE4;
+					numScore += (int)(SCORE_POINT::LINE4 * raisePoint);
+					ss << setw(10) << (int)(SCORE_POINT::LINE4 * raisePoint);
 					break;
 				}
+				//スコア加算エフェクト
 				base::RunEffect(new Effect_FadeString(122,280,32,ss.str()));
+				//消去ライン数加算
+				this->numDelLine += delLine;
 			}
 
 			//新しいミノの生産
@@ -344,7 +349,7 @@ void GamePage::UpData(void){
 			this->isHardDrop  = false;
 			this->isIdletime  = true;
 			this->isAlreadyHold = false;
-			this->IdleMax	  = 1500;
+			this->NowIdleSeconds = IdleMax;
 			this->OldDropSeconds = localNowCount;
 		}
 
@@ -389,9 +394,11 @@ void GamePage::UpData(void){
 			}
 		}
 
+		//レベルアップ処理
+		if(this->numDelLine > this->numGameLevel * 5) numGameLevel++;
+		this->DropMax = 1000 - 50 * (numGameLevel-1);
+		this->IdleMax = 1500 - 50 * (numGameLevel-1);
 	}
-
-	
 
 
 
@@ -441,7 +448,12 @@ void GamePage::Draw(void){
 	//スコア表示
 	SetFontSize(32);
 	DrawFormatString(20,300,GetColor( 255 , 255 , 255 ),"Score:%010d",numScore);
+	DrawFormatString(20,335,GetColor( 255 , 255 , 255 ),"Level:%03d",numGameLevel);
+	DrawFormatString(20,370,GetColor( 255 , 255 , 255 ),"Lines:%03d",numDelLine);
 	SetFontSize(16);
+
+	DrawFormatString(0,60,GetColor(255,255,255),"Drop:%d",DropMax);
+	DrawFormatString(0,80,GetColor(255,255,255),"Idle:%d",IdleMax);
 
 	//ゲームオーバー画面
 	if(isGameOver == true){

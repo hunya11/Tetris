@@ -91,7 +91,7 @@
       <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
     </ClCompile>
     <ClCompile Include="Effect_FadeString.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>ソース ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -141,7 +141,7 @@
       <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
     </ClInclude>
     <ClInclude Include="Effect_FadeString.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ヘッダー ファイル\BaseComponent\DrawableComponent\GameObject\Effect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

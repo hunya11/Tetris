@@ -3,6 +3,10 @@ class GamePage : public Page
 {
 private:
 
+	// Summary : 親クラス
+	typedef Page base;
+
+	// Summary : 得点
 	struct SCORE_POINT{
 		enum Point{
 			LINE1 = 100,
@@ -12,16 +16,6 @@ private:
 		};
 	};
 
-	// Summary : 親クラス
-	typedef Page base;
-
-	// Summary : ブロック
-	Block* block[20][10];
-
-	Block* hold[4][3];
-
-	Block* stock[3][4][3];
-	
 	// Summary : ミノ
 	struct MINO{
 		// Summary : x座標
@@ -31,6 +25,16 @@ private:
 		// Summary : 形
 		BLOCK::Type type;
 	};
+
+
+	// Summary : ブロック
+	Block* block[20][10];
+
+	// Summary : ホールド
+	Block* hold[4][3];
+
+	// Summary : ストック
+	Block* stock[3][4][3];
 	
 	// Summary : 操作するミノ
 	MINO mino[4];
@@ -74,6 +78,8 @@ private:
 	// Summary : 
 	int OldDropSeconds;
 	
+	int NowIdleSeconds;
+
 	// Summary : アイドルタイムの最大時間
 	int IdleMax;
 	
@@ -85,24 +91,37 @@ private:
 
 	// Summary : スコア
 	int numScore;
+	
+	// Summary :　消したラインの数
+	int numDelLine;
 
-	//オプション
-	bool isOptionMinoDrop;
+	// Summary :　ゲームレベル
+	int numGameLevel;
 
-	bool isOptionDrawGMino;
-
-	bool isOptionUseHardDrop;
-
-	bool isOptionUseSpin;
-
-	bool isOptionUseHold;
-
-	bool isOptionShowNext;
-
-
+	// Summary : ゲームオーバーかどうか
+	bool isGameOver;
 	
 
-	bool isGameOver;
+
+	//オプション
+	// Summary : ミノが時間で落下するか
+	bool isOptionMinoDrop;
+
+	// Summary : ゴーストを表示するか
+	bool isOptionDrawGMino;
+
+	// Summary : ハードドロップを使えるか
+	bool isOptionUseHardDrop;
+
+	// Summary : ミノを回転できるか
+	bool isOptionUseSpin;
+
+	// Summary : ホールドを使用できるか
+	bool isOptionUseHold;
+
+	// Summary : ネクストブロックを確認できるか
+	bool isOptionShowNext;
+
 
 public:
 	// Summary : コンストラクタ

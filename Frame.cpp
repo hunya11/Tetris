@@ -51,7 +51,7 @@ void Frame::Main(void) throw(int){
 		DrawBox(0,0,800,600,backgroundColor,TRUE);
 		page->UpData();
 		page->Draw();
-		DrawFormatString(70,30,GetColor(255,255,0),"FPS:%.2f",fps.GetFps());
+		DrawFormatString(0,30,GetColor(255,255,0),"FPS:%.2f",fps.GetFps());
 		ScreenFlip();
 		ClearDrawScreen();
 		fps.Wait();
