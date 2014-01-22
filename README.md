@@ -5,30 +5,30 @@
 ## 操作方法(Operation method)
 
 * カーソルキー：上(Cursor Key:Up)
-ハードドロップ
+ハードドロップ  
 Use Hard Drop
 
 * カーソルキー：右(Cursor Key:Right)
-テトリミノを右に移動
+テトリミノを右に移動  
 Tetrimino move to the right
 
 * カーソルキー：左(Cursor Key:Left)
-テトリミノを左に移動
+テトリミノを左に移動  
 Tetrimino move to the left
 
 * カーソルキー：下(Cursor Key:Down)
-テトリミノを下に移動
+テトリミノを下に移動  
 Tetrimino move to the down
 
 * スペースキー(Space Key)
-選択肢の決定/テトリミノを右回転
+選択肢の決定/テトリミノを右回転  
 Decision of the choice/Tetrimino spin to the right
 
 * タブキー(Tab Key)
-ホールド
+ホールド  
 Use Hold
 
 ## つくったひと(Created by)
-hunya11
-<https://github.com/hunya11>
-<shin5626@gmai.com>
+hunya11  
+<https://github.com/hunya11>  
+<shin5626@gmai.com>  
