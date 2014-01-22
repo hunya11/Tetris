@@ -31,4 +31,4 @@ Use Hold
 ## つくったひと(Created by)
 hunya11  
 <https://github.com/hunya11>  
-<shin5626@gmai.com>  
+<shin5626@gmail.com>  
