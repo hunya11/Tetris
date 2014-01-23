@@ -20,6 +20,7 @@ GamePage::~GamePage(void)
 
 
 void GamePage::Init(void){
+	//ブロックの設定
 	for(int y=0;y<sizeof(block)/sizeof(block[y]);y++){
 		for(int x=0;x<sizeof(block[y])/sizeof(block[y][x]);x++){
 			block[y][x] = new Block();
@@ -28,6 +29,7 @@ void GamePage::Init(void){
 		}
 	}
 
+	//ストックの設定
 	for(int z=0;z<3;z++){
 		for(int y=0;y<4;y++){
 			for(int x=0;x<3;x++){
@@ -38,6 +40,7 @@ void GamePage::Init(void){
 		}
 	}
 
+	//ホールドの設定
 	for(int y=0;y<4;y++){
 		for(int x=0;x<3;x++){
 			hold[y][x] = new Block();
@@ -46,27 +49,34 @@ void GamePage::Init(void){
 		}
 	}
 
+	//分布の設定
 	for(int i=0;i<7;i++){
 		dropBlock[i] = 0;
 	}
 
+	//乱数の設定
 	rand = new RandomNum();
 
+	//ゴーストの設定
 	for(int i=0;i<4;i++){
 		ghost[i].x = 0;
 		ghost[i].y = 0;
 		ghost[i].type = Block::FORM::NONE;
 	}
 
+	//ストックの取得
 	for(int i=0;i<3;i++){
 		minoNextStock[i] = GetRandMino();
 	}
 
+	//ミノの設定
 	MinoFactory(minoNextStock[0]);
 	PushMinoStock();
 
+	//ホールドの初期値
 	minoHold = Block::FORM::NONE;
 
+	//各フラグ
 	isGrounding = false;
 	isIdletime  = true;
 	isHardDrop  = false;
@@ -74,6 +84,7 @@ void GamePage::Init(void){
 	isSpin		= false;
 	isHold		= false;
 	isAlreadyHold = false;
+	isGameOver = false;
 
 	OldIdleSeconds = 0;
 	OldDropSeconds = 0;
@@ -81,14 +92,7 @@ void GamePage::Init(void){
 	NowIdleSeconds = IdleMax;
 	DropMax = 1000;
 
-
-	//つかわねーかも
-	//TCHAR bufOption[MAX_PATH];
-	//GetPrivateProfileString("Option", "isOptionMinoDrop", "Err",bufOption, sizeof(bufOption) / sizeof(TCHAR), "./Data/System.ini");
-	//if(string(bufOption) == "true"){
-	//	isOptionMinoDrop = false;
-	//}
-
+	//オプション項目
 	isOptionMinoDrop = true;
 	isOptionDrawGMino = true;
 	isOptionUseHardDrop = true;
@@ -96,19 +100,17 @@ void GamePage::Init(void){
 	isOptionUseHold = true;
 	isOptionShowNext = true;
 
+	//各スコア
 	numScore     = 0;
 	numDelLine   = 0;
 	numGameLevel = 1;
-
-
-	isGameOver = false;
-
 }
 
 
 void GamePage::UpData(void){
 	base::UpData();
 
+	//簡易テスト用
 	//if(key->CheckKeyPushed(KEY_INPUT_A) == true){
 	//	stringstream ss;
 	//	ss << setw(10) << /*setfill('0') <<*/ 100;
@@ -313,6 +315,7 @@ void GamePage::UpData(void){
 				}
 			}
 		
+			//もし1列以上消したのならスコア加算
 			if(delLine != 0){
 				stringstream ss;
 				double raisePoint = (1.0 + ((double)this->numGameLevel-1.0) / 10.0);
@@ -397,7 +400,7 @@ void GamePage::UpData(void){
 		//レベルアップ処理
 		if(this->numDelLine > this->numGameLevel * 5) numGameLevel++;
 		if(this->DropMax > 50)this->DropMax = 1000 - 50 * (numGameLevel-1);
-		if(this->DropMax > 50)this->IdleMax = 1500 - 50 * (numGameLevel-1);
+		if(this->DropMax > 50)	this->IdleMax = 1500 - 50 * (numGameLevel-1);
 	}
 
 
@@ -412,12 +415,6 @@ void GamePage::UpData(void){
 void GamePage::Draw(void){
 
 	DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "GamePage:%d",localNowCount);
-
-	//for(int i=0;i<3;i++){
-	//	DrawFormatString( 0, 17+i*17, GetColor( 255 , 255 , 255 ), "Next:%d",minoNextStock[i]);
-	//}
-	//
-	//DrawFormatString( 100, 17, GetColor( 255 , 255 , 255 ), "Hold:%d",minoHold);
 	
 	//ブロック描画
 	for(int y=0;y<sizeof(block)/sizeof(block[y]);y++){
@@ -431,6 +428,7 @@ void GamePage::Draw(void){
 	for(int z=0;z<3;z++){
 		for(int y=0;y<4;y++){
 			for(int x=0;x<3;x++){
+				//（コメントアウト部分）枠を表示するか
 				/*if(stock[z][y][x]->BlockType() != Block::FORM::NONE) */stock[z][y][x]->Draw();
 			}
 		}
@@ -441,6 +439,7 @@ void GamePage::Draw(void){
 	DrawFormatString( 370, 5, GetColor( 255 , 255 , 255 ), "HOLD");
 	for(int y=0;y<4;y++){
 		for(int x=0;x<3;x++){
+			//（コメントアウト部分）枠を表示するか
 			/*if(hold[y][x]->BlockType() != Block::FORM::NONE) */hold[y][x]->Draw();
 		}
 	}
@@ -452,8 +451,9 @@ void GamePage::Draw(void){
 	DrawFormatString(20,370,GetColor( 255 , 255 , 255 ),"Lines:%03d",numDelLine);
 	SetFontSize(16);
 
-	DrawFormatString(0,60,GetColor(255,255,255),"Drop:%d",DropMax);
-	DrawFormatString(0,80,GetColor(255,255,255),"Idle:%d",IdleMax);
+	//落下時間とアイドル時間の表示（デバック用）
+	//DrawFormatString(0,60,GetColor(255,255,255),"Drop:%d",DropMax);
+	//DrawFormatString(0,80,GetColor(255,255,255),"Idle:%d",IdleMax);
 
 	//ゲームオーバー画面
 	if(isGameOver == true){
@@ -471,6 +471,7 @@ void GamePage::LoadResource(void){
 
 
 void GamePage::SetMinoPos(MINO* buf){
+	//各ミノの初期位置
 	switch(buf[0].type){
 	case Block::FORM::I:
 		buf[0].x = 1;
