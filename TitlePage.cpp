@@ -46,6 +46,10 @@ void TitlePage::Draw(void){
 	DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "TitlePage:%d",localNowCount);
 	menu.Draw();
 
+	DrawFormatString( 500, 550, GetColor( 255 , 255 , 255 ), "åàíË ÅF Space");
+	DrawFormatString( 500, 570, GetColor( 255 , 255 , 255 ), "ëIë ÅF Cursor Key (Up&Down)");
+
+
 	base::Draw();
 }
 

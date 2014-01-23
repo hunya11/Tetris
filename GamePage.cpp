@@ -461,6 +461,14 @@ void GamePage::Draw(void){
 		DrawFormatString(20,100,GetColor( 255 , 255 , 255 ),"GameOver!");
 		SetFontSize(16);
 	}
+	
+	DrawFormatString( 0, 470, GetColor( 255 , 255 , 255 ), "ミノの移動　　 ： Cursor Key");
+	DrawFormatString( 0, 490, GetColor( 255 , 255 , 255 ), "                (Left & Right & Down)");
+	DrawFormatString( 0, 510, GetColor( 255 , 255 , 255 ), "ハードドロップ ： Cursor Key (Up)");
+	DrawFormatString( 0, 530, GetColor( 255 , 255 , 255 ), "ミノの回転　　 ： Space");
+	DrawFormatString( 0, 550, GetColor( 255 , 255 , 255 ), "ホールド　　 　： TAB");
+	DrawFormatString( 0, 570, GetColor( 255 , 255 , 255 ), "終了　　　　 　： ESC");
+
 
 	base::Draw();
 }
