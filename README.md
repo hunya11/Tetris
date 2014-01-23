@@ -1,6 +1,7 @@
 # テトリス(TETRiS)
 
-個人のプログラミングスキル向上を目的に、クラス構造を特に意識して製作。
+目的：個人のプログラミングスキル向上を目的に、クラス構造を特に意識して製作。  
+開発環境：Visual Studio 2010  
 
 ## 操作方法(Operation method)
 
@@ -30,5 +31,5 @@ Use Hold
 
 ## つくったひと(Created by)
 hunya11  
-<https://github.com/hunya11>  
-<shin5626@gmail.com>  
+GitHub:<https://github.com/hunya11>  
+Mail:<shin5626@gmail.com>  
