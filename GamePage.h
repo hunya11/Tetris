@@ -23,7 +23,7 @@ private:
 		// Summary : y座標
 		int y;
 		// Summary : 形
-		BLOCK::Type type;
+		Block::FORM::Type type;
 	};
 
 
@@ -43,10 +43,10 @@ private:
 	MINO ghost[4];
 
 	// Summary : 順番待ちミノの形
-	BLOCK::Type minoNextStock[3];
+	Block::FORM::Type minoNextStock[3];
 	
 	// Summary : ホールドしたミノの形
-	BLOCK::Type minoHold;
+	Block::FORM::Type minoHold;
 
 	// Summary : 乱数管理
 	RandomNum* rand;
@@ -145,12 +145,12 @@ public:
 	void SetMinoPos(MINO* buf);
 
 	// Summary : 指定されたブロックを生成
-	// Param   : BLOCK::Type type = 生成するブロック
-	void MinoFactory(BLOCK::Type type);
+	// Param   : Block::FORM::Type type = 生成するブロック
+	void MinoFactory(Block::FORM::Type type);
 
 	// Summary : ランダムなミノを取得
-	// Returns : BLOCK::Type型
-	BLOCK::Type GetRandMino(void);
+	// Returns : Block::FORM::Type型
+	Block::FORM::Type GetRandMino(void);
 	
 	// Summary : ストックを更新
 	void PushMinoStock(void);

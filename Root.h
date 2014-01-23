@@ -23,18 +23,7 @@ struct FRAME_PAGE {
 	};
 };
 
-struct BLOCK {
-	enum Type{
-		I = 0,
-		O,
-		S,
-		Z,
-		J,
-		L,
-		T,
-		NONE,
-	};
-};
+
 
 
 

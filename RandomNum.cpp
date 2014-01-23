@@ -25,18 +25,18 @@ int RandomNum::GetRand(int min,int max){
 }
 
 
-int RandomNum::GetRand(int min,int max,list<int> ex) throw(int){
-	if(max+1 <= ex.size()) throw -1;
-	if(ex.empty() == true) return this->GetRand(min,max);
+int RandomNum::GetRand(int min,int max,list<int> del) throw(int){
+	if(max+1 <= del.size()) throw -1;
+	if(del.empty() == true) return this->GetRand(min,max);
 
 	bool isLoop = false;
 	int num = 0;
 	do{
-		list<int>::iterator it = ex.begin();
+		list<int>::iterator it = del.begin();
 		isLoop = false;
 		uniform_int_distribution<int> dist(min, max);
 		num = dist(*mt);
-		while(it != ex.end()){
+		while(it != del.end()){
 			if(*it == num){
 				isLoop = true;
 				break;
@@ -48,12 +48,13 @@ int RandomNum::GetRand(int min,int max,list<int> ex) throw(int){
 	return num;
 }
 
-int RandomNum::GetRand(int max,list<int> ex) throw(int){
+int RandomNum::GetRand(int max,list<int> del) throw(int){
 	int num = 0;
 	try{
-		num =  this->GetRand(0,max,ex);
+		num =  this->GetRand(0,max,del);
 	}catch(int ex){
 		throw ex;
 	}
 	return num;
 }
+

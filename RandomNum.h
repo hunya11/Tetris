@@ -22,21 +22,22 @@ public:
 	// Returns : int型乱数
 	int GetRand(int min,int max);
 
-	// Summary : 0~maxまでの乱数を取得.また,exで指定した整数を除外
+	// Summary : 0~maxまでの乱数を取得.また,delで指定した整数を除外
 	// Param   : int max = 最大値
-	// param   : list<int> ex = 除外する選択肢
+	// param   : list<int> del = 除外する選択肢
 	// Returns : int型乱数
-	// Exception : max+1 <= ex.size()
+	// Exception : max+1 <= del.size()
 	// ExReturns : -1
-	int GetRand(int max,list<int> ex) throw(int);
+	int GetRand(int max,list<int> del) throw(int);
 
-	// Summary : min~maxまでの乱数を取得.また,exで指定した整数を除外
+	// Summary : min~maxまでの乱数を取得.また,delで指定した整数を除外
 	// param   : int min = 最小値
 	// Param   : int max = 最大値
-	// Param   : list<int> ex = 除外する選択肢
+	// Param   : list<int> del = 除外する選択肢
 	// Returns : int型乱数
-	// Exception : max+1 <= ex.size()
+	// Exception : max+1 <= del.size()
 	// ExReturns : -1
-	int GetRand(int min,int max,list<int> ex) throw(int);
+	int GetRand(int min,int max,list<int> del) throw(int);
+
 };
 

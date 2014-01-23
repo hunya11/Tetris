@@ -11,6 +11,19 @@ public:
 		};
 	};
 
+	struct FORM {
+		enum Type{
+			I = 0,
+			O,
+			S,
+			Z,
+			J,
+			L,
+			T,
+			NONE,
+		};
+	};
+
 	Block(void);
 	~Block(void);
 	void Init(void);
@@ -20,12 +33,12 @@ public:
 	void Status(STATUS::Type);
 	STATUS::Type Status(void);
 
-	void BlockType(BLOCK::Type);
-	BLOCK::Type BlockType(void);
+	void BlockType(Block::FORM::Type);
+	Block::FORM::Type BlockType(void);
 
 private:
 	typedef GameObject base;
 	STATUS::Type status;
-	BLOCK::Type  blockType;
+	Block::FORM::Type  blockType;
 };
 

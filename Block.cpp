@@ -16,7 +16,7 @@ void Block::Init(void){
 	this->SizeX(36.0);
 	this->SizeY(36.0);
 	this->status = STATUS::NONE;
-	this->blockType = BLOCK::NONE;
+	this->blockType = Block::FORM::NONE;
 }
 
 
@@ -25,25 +25,25 @@ void Block::UpData(void){
 		Texture(GetColor(255,255,255));
 	}else{
 		switch(blockType){
-		case BLOCK::I:
+		case Block::FORM::I:
 			Texture(GetColor(0,255,255));
 			break;
-		case BLOCK::O:
+		case Block::FORM::O:
 			Texture(GetColor(255,212,0));
 			break;
-		case BLOCK::S:
+		case Block::FORM::S:
 			Texture(GetColor(191,255,0));
 			break;
-		case BLOCK::Z:
+		case Block::FORM::Z:
 			Texture(GetColor(255,0,0));
 			break;
-		case BLOCK::J:
+		case Block::FORM::J:
 			Texture(GetColor(0,0,255));
 			break;
-		case BLOCK::L:
+		case Block::FORM::L:
 			Texture(GetColor(243,152,0));
 			break;
-		case BLOCK::T:
+		case Block::FORM::T:
 			Texture(GetColor(139,0,139));
 			break;
 		default:
@@ -73,11 +73,11 @@ Block::STATUS::Type Block::Status(void){
 }
 
 
-void Block::BlockType(BLOCK::Type type){
+void Block::BlockType(Block::FORM::Type type){
 	this->blockType = type;
 }
 
 
-BLOCK::Type Block::BlockType(void){
+Block::FORM::Type Block::BlockType(void){
 	return this->blockType;
 }

@@ -55,7 +55,7 @@ void GamePage::Init(void){
 	for(int i=0;i<4;i++){
 		ghost[i].x = 0;
 		ghost[i].y = 0;
-		ghost[i].type = BLOCK::NONE;
+		ghost[i].type = Block::FORM::NONE;
 	}
 
 	for(int i=0;i<3;i++){
@@ -65,7 +65,7 @@ void GamePage::Init(void){
 	MinoFactory(minoNextStock[0]);
 	PushMinoStock();
 
-	minoHold = BLOCK::NONE;
+	minoHold = Block::FORM::NONE;
 
 	isGrounding = false;
 	isIdletime  = true;
@@ -233,14 +233,14 @@ void GamePage::UpData(void){
 						this->block[mino[i].y][mino[i].x]->Status(Block::STATUS::NONE);
 					}
 
-					if(minoHold == BLOCK::NONE){//初回
+					if(minoHold == Block::FORM::NONE){//初回
 						//新しいミノの生産
 						minoHold = mino[0].type;
 						MinoFactory(minoNextStock[0]);
 						PushMinoStock();
 					}else{
 						//ホールドと交換
-						BLOCK::Type bufHold = minoHold;
+						Block::FORM::Type bufHold = minoHold;
 						minoHold = mino[0].type;
 						MinoFactory(bufHold);
 					}
@@ -431,7 +431,7 @@ void GamePage::Draw(void){
 	for(int z=0;z<3;z++){
 		for(int y=0;y<4;y++){
 			for(int x=0;x<3;x++){
-				/*if(stock[z][y][x]->BlockType() != BLOCK::NONE) */stock[z][y][x]->Draw();
+				/*if(stock[z][y][x]->BlockType() != Block::FORM::NONE) */stock[z][y][x]->Draw();
 			}
 		}
 	}
@@ -441,7 +441,7 @@ void GamePage::Draw(void){
 	DrawFormatString( 370, 5, GetColor( 255 , 255 , 255 ), "HOLD");
 	for(int y=0;y<4;y++){
 		for(int x=0;x<3;x++){
-			/*if(hold[y][x]->BlockType() != BLOCK::NONE) */hold[y][x]->Draw();
+			/*if(hold[y][x]->BlockType() != Block::FORM::NONE) */hold[y][x]->Draw();
 		}
 	}
 
@@ -472,7 +472,7 @@ void GamePage::LoadResource(void){
 
 void GamePage::SetMinoPos(MINO* buf){
 	switch(buf[0].type){
-	case BLOCK::I:
+	case Block::FORM::I:
 		buf[0].x = 1;
 		buf[0].y = 0;
 		buf[1].x = 1;
@@ -482,7 +482,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 1;
 		buf[3].y = 3;
 		break;
-	case BLOCK::O:
+	case Block::FORM::O:
 		buf[0].x = 0;
 		buf[0].y = 0;
 		buf[1].x = 1;
@@ -492,7 +492,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 1;
 		buf[3].y = 1;
 		break;
-	case BLOCK::S:
+	case Block::FORM::S:
 		buf[0].x = 0;
 		buf[0].y = 1;
 		buf[1].x = 1;
@@ -502,7 +502,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 2;
 		buf[3].y = 0;
 		break;
-	case BLOCK::Z:
+	case Block::FORM::Z:
 		buf[0].x = 0;
 		buf[0].y = 0;
 		buf[1].x = 1;
@@ -512,7 +512,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 2;
 		buf[3].y = 1;
 		break;
-	case BLOCK::J:
+	case Block::FORM::J:
 		buf[0].x = 0;
 		buf[0].y = 0;
 		buf[1].x = 0;
@@ -522,7 +522,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 2;
 		buf[3].y = 1;
 		break;
-	case BLOCK::L:
+	case Block::FORM::L:
 		buf[0].x = 0;
 		buf[0].y = 1;
 		buf[1].x = 1;
@@ -532,7 +532,7 @@ void GamePage::SetMinoPos(MINO* buf){
 		buf[3].x = 2;
 		buf[3].y = 0;
 		break;
-	case BLOCK::T:
+	case Block::FORM::T:
 		buf[0].x = 1;
 		buf[0].y = 0;
 		buf[1].x = 0;
@@ -546,7 +546,7 @@ void GamePage::SetMinoPos(MINO* buf){
 }
 
 
-void GamePage::MinoFactory(BLOCK::Type type){
+void GamePage::MinoFactory(Block::FORM::Type type){
 	int numAddPosX = 4;
 
 	MINO buf[4];
@@ -572,22 +572,44 @@ void GamePage::MinoFactory(BLOCK::Type type){
 }
 
 
-BLOCK::Type GamePage::GetRandMino(void){
-	list<int> ex;
+Block::FORM::Type GamePage::GetRandMino(void){
+	list<int> firstUse;
+	int num = 0;
+
 	for(int i=0;i<7;i++){
-		if(dropBlock[i] != 0) ex.push_back(i);
+		//除外設定
+		if(dropBlock[i] != 0) firstUse.push_back(i);
 	}
-	if(ex.size() != 7){
-		int num = 0;
+
+	if(firstUse.size() != 7){
+		//ミノが出そろっていない
 		try{
-			num = (rand->GetRand(6,ex));
+			num = (rand->GetRand(6,firstUse));
 		}catch(int ex){
 			num = (rand->GetRand(6));
 		}
-		dropBlock[num]++;
-		return (BLOCK::Type)num;
+	}else{
+		list<int> noUse;
+		//3回連続で同じミノが出現しないように
+		if(minoNextStock[0] == minoNextStock[1]) noUse.push_back((int)(minoNextStock[0]));
+
+		//最も出現しているミノと2番目に出現しているミノを出現しないように（たぶん最初の方はIがでずらくなる）
+		int max = 0;
+		int second = 0;
+		for(int i=1;i<sizeof(dropBlock)/sizeof(dropBlock[0]);i++){
+			if(dropBlock[max] < dropBlock[i]) {
+				second = max;
+				max = i;
+			}
+		}
+		noUse.push_back(max);
+		noUse.push_back(second);
+
+		num = rand->GetRand(6,noUse);
 	}
-	else return (BLOCK::Type)(rand->GetRand(6))	;
+
+	dropBlock[num]++;
+	return (Block::FORM::Type)num;
 }
 
 
@@ -601,7 +623,7 @@ void GamePage::PushMinoStock(void){
 
 void GamePage::SpinMino(bool clockwise){
 
-	if(mino[0].type != BLOCK::I){
+	if(mino[0].type != Block::FORM::I){
 
 		int swapA[3][3];
 		int swapB[3][3];
@@ -748,7 +770,7 @@ void GamePage::MakeGhost(void){
 
 
 void GamePage::SetDrawHoldMinoPos(void){
-	if(this->minoHold == BLOCK::NONE) return;
+	if(this->minoHold == Block::FORM::NONE) return;
 
 	MINO buf[4];
 	for(int i=0;i<4;i++){
@@ -760,7 +782,7 @@ void GamePage::SetDrawHoldMinoPos(void){
 
 	for(int y=0;y<4;y++){
 		for(int x=0;x<3;x++){
-			hold[y][x]->BlockType(BLOCK::NONE);
+			hold[y][x]->BlockType(Block::FORM::NONE);
 			hold[y][x]->Status(Block::STATUS::NONE);
 		}
 	}
@@ -786,7 +808,7 @@ void GamePage::SetDrawStockMinoPos(void){
 
 		for(int y=0;y<4;y++){
 			for(int x=0;x<3;x++){
-				stock[z][y][x]->BlockType(BLOCK::NONE);
+				stock[z][y][x]->BlockType(Block::FORM::NONE);
 				stock[z][y][x]->Status(Block::STATUS::NONE);
 			}
 		}
