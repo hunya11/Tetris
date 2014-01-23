@@ -396,8 +396,8 @@ void GamePage::UpData(void){
 
 		//レベルアップ処理
 		if(this->numDelLine > this->numGameLevel * 5) numGameLevel++;
-		this->DropMax = 1000 - 50 * (numGameLevel-1);
-		this->IdleMax = 1500 - 50 * (numGameLevel-1);
+		if(this->DropMax > 50)this->DropMax = 1000 - 50 * (numGameLevel-1);
+		if(this->DropMax > 50)this->IdleMax = 1500 - 50 * (numGameLevel-1);
 	}
 
 
