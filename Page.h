@@ -8,8 +8,10 @@ private:
 	// Summary : ページを起動したときの時間
 	int startNowCount;
 
+	//エフェクトリスト
 	vector<Effect*> effList;
 
+	//エフェクトマネージャー
 	void EffectManager(void);
 
 protected:
@@ -37,10 +39,12 @@ public:
 	// Summary : リソース読み込み
 	virtual void LoadResource(void) = 0;
 
+	//エフェクトの実行
+	void RunEffect(Effect* eff);
+
 	/*プロパティ*/
 	void static NowPage(FRAME_PAGE::Type fp);
 	FRAME_PAGE::Type static NowPage(void);
-	
-	void RunEffect(Effect* eff);
+
 };
 

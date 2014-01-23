@@ -72,12 +72,13 @@ private:
 	// Summary : すでにホールドしているか
 	bool isAlreadyHold;
 	
-	// Summary : 
+	// Summary : 前フレームのアイドル時間
 	int OldIdleSeconds;
 	
-	// Summary : 
+	// Summary : 前フレームの落下待機時間
 	int OldDropSeconds;
 	
+	// Summary : 現フレームのアイドル時間
 	int NowIdleSeconds;
 
 	// Summary : アイドルタイムの最大時間
@@ -122,8 +123,14 @@ private:
 	// Summary : ネクストブロックを確認できるか
 	bool isOptionShowNext;
 
+	//時間関係
+	// Summary : 分
 	int numTime_m;
+
+	// Summary : 秒
 	int numTime_s;
+
+	// Summary : ミリ秒
 	int numTime_ms;
 
 
@@ -160,14 +167,16 @@ public:
 	void PushMinoStock(void);
 	
 	// Summary : ミノの回転
-	// Param   : bool clockwise = true：時計回り,false:反時計回り
+	// Param   : bool clockwise = true：時計回り,false:反時計回り（未完成）
 	void SpinMino(bool clockwise);
 
 	// Summary : ゴーストの生成
 	void MakeGhost(void);
 
+	// Summary : ホールドの描画位置設定
 	void SetDrawHoldMinoPos(void);
 
+	// Summary : ストックの描画位置設定
 	void SetDrawStockMinoPos(void);
 
 
