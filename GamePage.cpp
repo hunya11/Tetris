@@ -104,6 +104,10 @@ void GamePage::Init(void){
 	numScore     = 0;
 	numDelLine   = 0;
 	numGameLevel = 1;
+
+	numTime_m = 0;
+	numTime_s = 0;
+	numTime_ms = 0;
 }
 
 
@@ -414,7 +418,7 @@ void GamePage::UpData(void){
 
 void GamePage::Draw(void){
 
-	DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "GamePage:%d",localNowCount);
+	//DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "GamePage:%d",localNowCount);
 	
 	//ブロック描画
 	for(int y=0;y<sizeof(block)/sizeof(block[y]);y++){
@@ -444,30 +448,36 @@ void GamePage::Draw(void){
 		}
 	}
 
+	//落下時間とアイドル時間の表示（デバック用）
+	//DrawFormatString(0,60,GetColor(255,255,255),"Drop:%d",DropMax);
+	//DrawFormatString(0,80,GetColor(255,255,255),"Idle:%d",IdleMax);
+
+	
+	if(isGameOver == true){
+		//ゲームオーバー画面
+		SetFontSize(32);
+		DrawFormatString(20,100,GetColor( 255 , 255 , 255 ),"GameOver!");
+		SetFontSize(16);
+	}else{
+		numTime_m = localNowCount / 60000;
+		numTime_s =  numTime_m * -60 + localNowCount / 1000;
+		numTime_ms = numTime_m * -60000 + numTime_s * -1000 + localNowCount;
+	}
+	
 	//スコア表示
 	SetFontSize(32);
 	DrawFormatString(20,300,GetColor( 255 , 255 , 255 ),"Score:%010d",numScore);
 	DrawFormatString(20,335,GetColor( 255 , 255 , 255 ),"Level:%03d",numGameLevel);
 	DrawFormatString(20,370,GetColor( 255 , 255 , 255 ),"Lines:%03d",numDelLine);
+	DrawFormatString(20,405,GetColor( 255 , 255 , 255 ),"Times:%02dm,%02ds,%03d",numTime_m,numTime_s,numTime_ms);
 	SetFontSize(16);
-
-	//落下時間とアイドル時間の表示（デバック用）
-	//DrawFormatString(0,60,GetColor(255,255,255),"Drop:%d",DropMax);
-	//DrawFormatString(0,80,GetColor(255,255,255),"Idle:%d",IdleMax);
-
-	//ゲームオーバー画面
-	if(isGameOver == true){
-		SetFontSize(32);
-		DrawFormatString(20,100,GetColor( 255 , 255 , 255 ),"GameOver!");
-		SetFontSize(16);
-	}
 	
-	DrawFormatString( 0, 470, GetColor( 255 , 255 , 255 ), "ミノの移動　　 ： Cursor Key");
-	DrawFormatString( 0, 490, GetColor( 255 , 255 , 255 ), "                (Left & Right & Down)");
-	DrawFormatString( 0, 510, GetColor( 255 , 255 , 255 ), "ハードドロップ ： Cursor Key (Up)");
-	DrawFormatString( 0, 530, GetColor( 255 , 255 , 255 ), "ミノの回転　　 ： Space");
-	DrawFormatString( 0, 550, GetColor( 255 , 255 , 255 ), "ホールド　　 　： TAB");
-	DrawFormatString( 0, 570, GetColor( 255 , 255 , 255 ), "終了　　　　 　： ESC");
+	DrawFormatString( 5, 470, GetColor( 255 , 255 , 255 ), "ミノの移動　　 ： Cursor Key");
+	DrawFormatString( 5, 490, GetColor( 255 , 255 , 255 ), "                (Left & Right & Down)");
+	DrawFormatString( 5, 510, GetColor( 255 , 255 , 255 ), "ハードドロップ ： Cursor Key (Up)");
+	DrawFormatString( 5, 530, GetColor( 255 , 255 , 255 ), "ミノの回転　　 ： Space");
+	DrawFormatString( 5, 550, GetColor( 255 , 255 , 255 ), "ホールド　　 　： TAB");
+	DrawFormatString( 5, 570, GetColor( 255 , 255 , 255 ), "終了　　　　 　： ESC");
 
 
 	base::Draw();

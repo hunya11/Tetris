@@ -122,6 +122,10 @@ private:
 	// Summary : ネクストブロックを確認できるか
 	bool isOptionShowNext;
 
+	int numTime_m;
+	int numTime_s;
+	int numTime_ms;
+
 
 public:
 	// Summary : コンストラクタ

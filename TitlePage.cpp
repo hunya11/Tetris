@@ -43,7 +43,7 @@ void TitlePage::UpData(void){
 
 
 void TitlePage::Draw(void){
-	DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "TitlePage:%d",localNowCount);
+	//DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "TitlePage:%d",localNowCount);
 	menu.Draw();
 
 	DrawFormatString( 500, 550, GetColor( 255 , 255 , 255 ), "åàíË ÅF Space");
