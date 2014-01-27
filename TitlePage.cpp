@@ -45,6 +45,10 @@ void TitlePage::UpData(void){
 void TitlePage::Draw(void){
 	//DrawFormatString( 0, 0, GetColor( 255 , 255 , 255 ), "TitlePage:%d",localNowCount);
 	menu.Draw();
+	
+	SetFontSize(64);
+	DrawFormatString( 300, 150, GetColor( 255 , 255 , 255 ), "TETRiS");
+	SetFontSize(16);
 
 	DrawFormatString( 500, 550, GetColor( 255 , 255 , 255 ), "åàíË ÅF Space");
 	DrawFormatString( 500, 570, GetColor( 255 , 255 , 255 ), "ëIë ÅF Cursor Key (Up&Down)");
